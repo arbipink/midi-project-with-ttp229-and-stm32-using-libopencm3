@@ -133,9 +133,9 @@ static const struct usb_config_descriptor config = {
 };
 
 static const char *usb_strings[] = {
-	"Black Sphere Technologies",
-	"CDC-ACM Demo",
-	"DEMO",
+	"Arbin Companies",
+	"Midi Controller",
+	"0.1",
 };
 
 /* Buffer to be used for control requests. */
@@ -215,26 +215,34 @@ int main(void) {
 
 	rcc_clock_setup_pll(&rcc_hse_configs[RCC_CLOCK_HSE8_72MHZ]);
 	rcc_periph_clock_enable(RCC_GPIOC);
-	//rcc_periph_clock_enable(RCC_GPIOB);
     rcc_periph_clock_enable(RCC_USB);
 
-	gpio_set_mode(GPIOC, 
-			GPIO_MODE_OUTPUT_2_MHZ,
-			GPIO_CNF_OUTPUT_PUSHPULL,
-			GPIO13);
+	gpio_set_mode(GPIOC,
+        GPIO_MODE_OUTPUT_2_MHZ,
+        GPIO_CNF_OUTPUT_PUSHPULL,
+        GPIO13
+    );
+
+
+    gpio_set(GPIOC, GPIO15);
+    gpio_set_mode(GPIOC, 
+        GPIO_MODE_INPUT, 
+        GPIO_CNF_INPUT_PULL_UPDOWN, 
+        GPIO15
+    );
 
     usbd_dev = usbd_init(&st_usbfs_v1_usb_driver, &dev, &config, usb_strings, 3, usbd_control_buffer, sizeof(usbd_control_buffer));
 	usbd_register_set_config_callback(usbd_dev, cdcacm_set_config);
 
-    for (i = 0; i < 0x1000000; i++)
-		__asm__("nop");
-
 	gpio_clear(GPIOC, GPIO13);
 
 	while(1) {
-		for (int j = 0; j < 1000000; j++) {
-			__asm__("nop");
-		}
-		gpio_toggle(GPIOC, GPIO13);
+        usbd_poll(usbd_dev);
+
+        if (gpio_get(GPIOC, GPIO15)) {
+            gpio_set(GPIOC, GPIO13);
+        } else {
+            gpio_clear(GPIOC, GPIO13);
+        }
 	}
 }
