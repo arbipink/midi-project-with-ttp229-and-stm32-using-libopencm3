@@ -232,7 +232,7 @@ int main(void) {
 	gpio_clear(GPIOC, GPIO13);
 
 	while(1) {
-		for (int i = 0; i < 1000000; i++) {
+		for (int j = 0; j < 1000000; j++) {
 			__asm__("nop");
 		}
 		gpio_toggle(GPIOC, GPIO13);
