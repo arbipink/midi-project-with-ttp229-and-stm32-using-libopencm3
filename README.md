@@ -1,4 +1,4 @@
-### MIDI Project with libopencm3
+# MIDI Project with libopencm3
 
 This project implements a USB MIDI controller using the STM32F103C8T6 “Blue Pill” board and [libopencm3 midi usb Examples](https://github.com/libopencm3/libopencm3-examples/tree/master/examples/stm32/f4/stm32f4-discovery/usb_midi).
 
@@ -6,11 +6,11 @@ It uses a TTP229 16-key capacitive touch keypad as the input source and sends MI
 
 ## Hardware Setup
 
-# Hardware Needed
+### Hardware Needed
 1. MCU Board: STM32F103C8T6 ("Blue Pill")
 2. Input Sensor: TTP229 16-key touch sensor (I²C mode)
 
-# Wiring
+### Wiring
 | TTP229 Pin | STM32F103C8 Pin |
 | ---------- | --------------- |
 | `SDO`      | `PA6`           |
@@ -23,17 +23,17 @@ It uses a TTP229 16-key capacitive touch keypad as the input source and sends MI
 The TP2, TP3, and TP4 pins on the TTP229 side are connected to configure the sensor for 16-key mode and multitouch function.
 
 ## Getting Started
-# Prerequisites
+### Prerequisites
 Make sure you have the following toolchain
 ```
 sudo apt install stlink-tools gcc-arm-none-eabi
 ```
-# Clone the repo
+### Clone the repo
 ```
 git clone --recurse-submodules https://github.com/arbipink/midi-project-with-libopencm3.git
 cd midi-project-with-libopencm3
 ```
-# Build
+### Build
 first build libopencm3 (only needed once)
 ```
 make -C libopencm3
@@ -43,7 +43,7 @@ then build the project
 ```
 make -C my-project
 ```
-# Flash
+### Flash
 ```
 cd my-project
 st-flash --reset write midi-project.bin 0x8000000
