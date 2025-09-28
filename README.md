@@ -30,12 +30,12 @@ sudo apt install stlink-tools gcc-arm-none-eabi
 ```
 ### Clone the repo
 ```
-git clone --recurse-submodules https://github.com/arbipink/midi-project-with-libopencm3.git
-cd midi-project-with-libopencm3
+git clone --recurse-submodules https://github.com/arbipink/midi-project-with-ttp229-and-stm32-using-libopencm3.git midi-project
 ```
 ### Build
 first build libopencm3 (only needed once)
 ```
+cd midi-project
 make -C libopencm3
 ```
 
