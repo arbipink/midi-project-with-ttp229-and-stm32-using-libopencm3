@@ -52,6 +52,7 @@ st-flash --reset write midi-project.bin 0x8000000
 ## What i will do in the future
 1. Add functionality to change octave
 2. Add functionality to control midi cc
+3. Change from polling driven to interrupt driven for the keys
 
 ## License
 
